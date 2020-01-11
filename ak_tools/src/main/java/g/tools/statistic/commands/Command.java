@@ -4,7 +4,9 @@ public enum Command {
 
     ADD_RECORD("add"),
     SAVE_FILE("save"),
+    SAVE_NEXT_FILE("savenext"),
     READ_FILE("read"),
+    ADD_S("adds"),
     EXIT("exit");
 
     private final String name;

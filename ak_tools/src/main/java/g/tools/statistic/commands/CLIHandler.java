@@ -1,141 +1,85 @@
 package g.tools.statistic.commands;
 
-import g.tools.statistic.models.Record;
 import g.tools.statistic.models.Statistics;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;
-import org.apache.commons.csv.CSVRecord;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class CLIHandler {
 
-    private static Statistics statistics = new Statistics();
+    enum StepCode {
+        OK(0),
+        EXIT(-1);
 
+        private final int code;
 
-    private static final CommandExecutor ADD_RECORD = (input) -> {
-        Scanner in = (Scanner)input;
-        try {
-            Record record = inputRecord(in);
-            statistics.getRecords().add(record);
-        } catch (NumberFormatException ex) {
-            System.out.println(ex.getMessage());
+        StepCode(int code) {
+            this.code = code;
         }
-        return null;
-    };
-
-    private static final CommandExecutor SAVE_FILE = (input) -> {
-        String fileName = (String)input;
-        try (FileWriter out = new FileWriter(fileName)) {
-            try (CSVPrinter printer = new CSVPrinter(out, CSVFormat.DEFAULT.withHeader(Record.HEADER))) {
-                for (Record record : statistics.getRecords()) {
-                    printer.printRecord(record.getAsStringArray());
-                }
-            }
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return null;
-    };
-
-    private static final CommandExecutor READ_FILE = (input) -> {
-        String fileName = (String)input;
-
-        try (Reader in = new FileReader(fileName)) {
-            Iterable<CSVRecord> records = CSVFormat.DEFAULT
-                    .withHeader(Record.HEADER)
-                    .withFirstRecordAsHeader()
-                    .parse(in);
-            Record.RecordBuilder builder = Record.RecordBuilder.builder();
-
-            for (CSVRecord record : records) {
-                Record modelRecord = builder
-                        .setComment(record.get(Record.COMMENT))
-                        .setDate(Instant.parse(record.get(Record.DATE)))
-                        .setType(record.get(Record.TYPE))
-                        .setDescription(record.get(Record.DESCRIPTION))
-                        .setTimeHours(Double.valueOf(record.get(Record.TIME_HOURS)))
-                        .build();
-                statistics.getRecords().add(modelRecord);
-            }
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return null;
-    };
-
-
-    private static final Map<Command, CommandExecutor> commands = new HashMap<>();
-    static {
-        commands.put(Command.ADD_RECORD, ADD_RECORD);
-        commands.put(Command.SAVE_FILE, SAVE_FILE);
-        commands.put(Command.READ_FILE, READ_FILE);
     }
 
+    private String currentFilePath;
+    Statistics statistics = new Statistics();
+    private StandardCommands standardCommands = new StandardCommands(statistics);
 
     public CLIHandler() {
     }
 
     public void run() {
         System.out.println("Start the program...");
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a command:");
 
-        while (true) {
-            String line = scanner.nextLine();
-            Command command = Command.parse(line);
-            if (command == Command.EXIT) {
-                break;
-            }
+        while (nextStep(scanner, null, null) != StepCode.EXIT);
+    }
 
-            CommandExecutor commandExecutor = commands.get(command);
-            Object input;
-
+    private StepCode nextStep(Scanner scanner, Command inputCommand, Object sInput) {
+        Command command = inputCommand == null ? Command.parse(scanner.nextLine()) : inputCommand;
+        if (command == Command.EXIT) {
+            return StepCode.EXIT;
+        }
+        Object input = sInput;
+        if (input == null) {
             switch (command) {
                 case SAVE_FILE:
-                case READ_FILE:_FILE:
-                    System.out.println("Enter file path: ");
-                    input = scanner.nextLine();
+                case READ_FILE:
+                    String filePath = getFilePathFromCLI(scanner);
+                    this.currentFilePath = filePath;
+                    input = filePath;
+                    break;
+                case SAVE_NEXT_FILE:
+                    input = this.currentFilePath;
                     break;
                 case ADD_RECORD:
                     input = scanner;
                     break;
+                case ADD_S:
+                    Map<String, Object> parameters = new HashMap<>();
+                    parameters.put("scanner", scanner);
+                    parameters.put("filePath", this.currentFilePath);
+                    input = parameters;
+                    break;
                 default:
                     throw new RuntimeException("Unknown command: " + command);
             }
-            commandExecutor.execute(input);
-            System.out.println("Command " + command + " executed");
         }
+
+        runCommand(command, input);
+        System.out.println("Command " + command + " executed");
+
+        return StepCode.OK;
     }
 
-    private static Record inputRecord(Scanner in) {
-        // public static String[] HEADER = {DATE, TYPE, TIME_HOURS, DESCRIPTION, COMMENT};
-        // Default value
-        String instant = String.valueOf(Instant.now());
-        System.out.println("type + time hours + description");
-        String type = in.nextLine();
-        String timeHours = in.nextLine();
-        String description = in.nextLine();
-        String comment = null;
+    private String getFilePathFromCLI(Scanner scanner) {
+        System.out.println("Enter file path: ");
+        String filePath = scanner.nextLine();
+        return filePath;
+    }
 
-        String values[] = {
-                instant,
-                type,
-                timeHours,
-                description,
-                comment};
-
-        return Record.RecordBuilder.builder(values).build();
+    private Object runCommand(Command command, Object input) {
+        CommandExecutor commandExecutor = standardCommands.getCommands().get(command);
+        return commandExecutor.execute(input);
     }
 
 }
