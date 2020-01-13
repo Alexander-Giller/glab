@@ -40,6 +40,8 @@ public class CLIHandler {
             return StepCode.EXIT;
         }
         Object input = sInput;
+
+        // TODO use chain of responsibilities pattern.
         if (input == null) {
             switch (command) {
                 case SAVE_FILE:
