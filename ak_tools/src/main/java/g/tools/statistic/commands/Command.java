@@ -6,6 +6,7 @@ public enum Command {
     SAVE_FILE("save"),
     SAVE_NEXT_FILE("savenext"),
     READ_FILE("read"),
+    LOAD_FILE("load"),
     ADD_S("adds"),
     EXIT("exit");
 

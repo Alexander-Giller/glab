@@ -46,6 +46,7 @@ public class CLIHandler {
             switch (command) {
                 case SAVE_FILE:
                 case READ_FILE:
+                case LOAD_FILE:
                     String filePath = getFilePathFromCLI(scanner);
                     this.currentFilePath = filePath;
                     input = filePath;

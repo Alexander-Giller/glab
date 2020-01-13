@@ -28,6 +28,7 @@ public class StandardCommands {
         commands.put(Command.ADD_RECORD, ADD_RECORD);
         commands.put(Command.SAVE_FILE, SAVE_FILE);
         commands.put(Command.READ_FILE, READ_FILE);
+        commands.put(Command.LOAD_FILE, READ_FILE);
         commands.put(Command.ADD_S, ADD_S);
         commands.put(Command.SAVE_NEXT_FILE, SAVE_NEXT_FILE);
     }
