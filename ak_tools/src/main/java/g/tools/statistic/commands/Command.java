@@ -24,6 +24,7 @@ public enum Command {
             }
         }
 
-        throw new RuntimeException("Unknown command: " + command);
+        System.out.println("Unknown command: " + command);
+        return null;
     }
 }

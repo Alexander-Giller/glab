@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class CLIHandler {
 
     enum StepCode {
+        UNKNOWN_COMMAND(1),
         OK(0),
         EXIT(-1);
 
@@ -38,7 +39,10 @@ public class CLIHandler {
         Command command = inputCommand == null ? Command.parse(scanner.nextLine()) : inputCommand;
         if (command == Command.EXIT) {
             return StepCode.EXIT;
+        } else if (command == null) {
+            return StepCode.UNKNOWN_COMMAND;
         }
+
         Object input = sInput;
 
         // TODO use chain of responsibilities pattern.
@@ -64,7 +68,9 @@ public class CLIHandler {
                     input = parameters;
                     break;
                 default:
-                    throw new RuntimeException("Unknown command: " + command);
+                    //throw new RuntimeException("Unknown command: " + command);
+                    System.out.println("Unknown command: " + command);
+                    return StepCode.UNKNOWN_COMMAND;
             }
         }
 
@@ -74,7 +80,7 @@ public class CLIHandler {
         return StepCode.OK;
     }
 
-    private String getFilePathFromCLI(Scanner scanner) {
+    private static String getFilePathFromCLI(Scanner scanner) {
         System.out.println("Enter file path: ");
         String filePath = scanner.nextLine();
         return filePath;
