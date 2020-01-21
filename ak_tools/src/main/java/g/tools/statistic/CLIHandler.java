@@ -1,6 +1,9 @@
-package g.tools.statistic.commands;
+package g.tools.statistic;
 
 
+import g.tools.statistic.commands.Command;
+import g.tools.statistic.commands.CommandExecutor;
+import g.tools.statistic.commands.StandardCommands;
 import g.tools.statistic.commands.wrappers.*;
 import g.tools.statistic.commands.wrappers.impl.AddRecordInput;
 import g.tools.statistic.commands.wrappers.impl.AddsRecordInput;

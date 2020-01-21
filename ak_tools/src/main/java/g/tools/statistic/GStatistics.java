@@ -1,6 +1,5 @@
 package g.tools.statistic;
 
-import g.tools.statistic.commands.CLIHandler;
 import java.io.IOException;
 
 public class GStatistics {
