@@ -23,8 +23,7 @@ public class StandardCommands {
     private final Statistics statistics = new Statistics();
 
 
-    public StandardCommands(Statistics statistics) {
-        this.statistics.setRecords(statistics.getRecords());
+    public StandardCommands() {
         commands.put(Command.ADD_RECORD, ADD_RECORD);
         commands.put(Command.SAVE_FILE, SAVE_FILE);
         commands.put(Command.READ_FILE, READ_FILE);

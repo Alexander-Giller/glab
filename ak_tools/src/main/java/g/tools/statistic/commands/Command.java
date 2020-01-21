@@ -1,5 +1,6 @@
 package g.tools.statistic.commands;
 
+
 public enum Command {
 
     ADD_RECORD("add"),
