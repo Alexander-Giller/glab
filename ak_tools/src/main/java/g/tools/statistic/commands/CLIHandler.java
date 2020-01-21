@@ -48,7 +48,7 @@ public class CLIHandler {
 
     private StepCode nextStep(Command inputCommand, Object sInput) {
         Command command = inputCommand == null ? Command.parse(scanner.nextLine()) : inputCommand;
-        if (command == Command.EXIT) {
+        if (command == Command.EXIT || command == Command.EXIT_SHORT) {
             return StepCode.EXIT;
         } else if (command == null) {
             return StepCode.UNKNOWN_COMMAND;
@@ -56,15 +56,10 @@ public class CLIHandler {
 
         Object input = sInput;
 
-        // TODO use chain of responsibilities pattern.
         if (input == null) {
             input = this.commandsChain.handle(command);
-            //throw new RuntimeException("Unknown command: " + command);
-//            System.out.println("Unknown command: " + command);
-//            return StepCode.UNKNOWN_COMMAND;
         }
 
-//        System.out.println(command + " ----> " + input);
         CommandExecutor commandExecutor = standardCommands.getCommands().get(command);
         commandExecutor.execute(input);
         System.out.println("Command " + command + " executed");

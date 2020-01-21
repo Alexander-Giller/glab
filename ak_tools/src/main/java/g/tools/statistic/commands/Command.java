@@ -8,6 +8,7 @@ public enum Command {
     READ_FILE("read"),
     LOAD_FILE("load"),
     ADD_S("adds"),
+    EXIT_SHORT("!"),
     EXIT("exit");
 
     private final String name;
