@@ -1,12 +1,12 @@
 package g.tools.statistic.commands.wrappers.impl;
 
 import g.tools.statistic.commands.Command;
-import g.tools.statistic.commands.wrappers.InputPreparatorWithScanner;
+import g.tools.statistic.commands.wrappers.InputProcessorWithScanner;
 import g.tools.statistic.models.State;
 
 import java.util.Scanner;
 
-public class FilePathInput extends InputPreparatorWithScanner {
+public class FilePathInput extends InputProcessorWithScanner {
 
     public FilePathInput(State state, Scanner scanner) {
         super(state, scanner);

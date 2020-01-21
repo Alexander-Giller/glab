@@ -2,15 +2,14 @@ package g.tools.statistic.commands.wrappers;
 
 import g.tools.statistic.commands.Command;
 
-public interface IInputPreparator {
+public interface IInputProcessor {
 
     Object handle(Command command);
 
     boolean canHandle(Command command);
 
-    IInputPreparator getNextCommand();
+    IInputProcessor getNextCommand();
 
-    IInputPreparator setNextCommand(IInputPreparator command);
-
+    IInputProcessor setNextCommand(IInputProcessor command);
 
 }

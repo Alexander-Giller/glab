@@ -3,22 +3,22 @@ package g.tools.statistic.commands.wrappers;
 import g.tools.statistic.commands.Command;
 import g.tools.statistic.models.State;
 
-public abstract class InputPreparator implements IInputPreparator {
+public abstract class InputProcessor implements IInputProcessor {
 
-    private IInputPreparator commandInputWrapper;
+    private IInputProcessor commandInputWrapper;
     private final State state;
 
-    public InputPreparator(State state) {
+    public InputProcessor(State state) {
         this.state = state;
     }
 
     @Override
-    public IInputPreparator getNextCommand() {
+    public IInputProcessor getNextCommand() {
         return this.commandInputWrapper;
     }
 
     @Override
-    public IInputPreparator setNextCommand(IInputPreparator command) {
+    public IInputProcessor setNextCommand(IInputProcessor command) {
         this.commandInputWrapper = command;
         return this.commandInputWrapper;
     }
@@ -29,7 +29,7 @@ public abstract class InputPreparator implements IInputPreparator {
         if (canHandle(command)) {
             res = internalHandle(command);
         } else {
-            IInputPreparator nextChain = getNextCommand();
+            IInputProcessor nextChain = getNextCommand();
             res = nextChain == null ? null : nextChain.handle(command);
         }
         return res;

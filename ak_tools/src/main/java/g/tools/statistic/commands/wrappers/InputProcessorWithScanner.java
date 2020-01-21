@@ -6,11 +6,11 @@ import g.tools.statistic.models.State;
 import java.util.Scanner;
 
 
-public abstract class InputPreparatorWithScanner extends InputPreparator {
+public abstract class InputProcessorWithScanner extends InputProcessor {
 
     private final Scanner scanner;
 
-    public InputPreparatorWithScanner(State state, Scanner scanner) {
+    public InputProcessorWithScanner(State state, Scanner scanner) {
         super(state);
         this.scanner = scanner;
     }

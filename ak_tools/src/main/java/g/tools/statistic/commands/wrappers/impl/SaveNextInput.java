@@ -1,10 +1,10 @@
 package g.tools.statistic.commands.wrappers.impl;
 
 import g.tools.statistic.commands.Command;
-import g.tools.statistic.commands.wrappers.InputPreparator;
+import g.tools.statistic.commands.wrappers.InputProcessor;
 import g.tools.statistic.models.State;
 
-public class SaveNextInput extends InputPreparator {
+public class SaveNextInput extends InputProcessor {
 
     public SaveNextInput(State state) {
         super(state);

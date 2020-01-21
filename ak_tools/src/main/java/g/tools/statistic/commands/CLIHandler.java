@@ -31,7 +31,7 @@ public class CLIHandler {
     private final State state;
     private final Scanner scanner;
     private final StandardCommands standardCommands;
-    private final IInputPreparator commandsChain;
+    private final IInputProcessor inputProcessorChain;
 
 
     public CLIHandler() {
@@ -39,8 +39,7 @@ public class CLIHandler {
         this.state = new State();
         this.standardCommands = new StandardCommands();
 
-        this.commandsChain = new FilePathInput(this.state, this.scanner);
-        this.commandsChain
+        this.inputProcessorChain = new FilePathInput(this.state, this.scanner)
                 .setNextCommand(new SaveNextInput(this.state))
                 .setNextCommand(new AddRecordInput(this.state, this.scanner))
                 .setNextCommand(new AddsRecordInput(this.state, this.scanner));
@@ -64,7 +63,7 @@ public class CLIHandler {
 
         Object input = sInput;
         if (input == null) {
-            input = this.commandsChain.handle(command);
+            input = this.inputProcessorChain.handle(command);
         }
 
         CommandExecutor commandExecutor = standardCommands.getCommands().get(command);

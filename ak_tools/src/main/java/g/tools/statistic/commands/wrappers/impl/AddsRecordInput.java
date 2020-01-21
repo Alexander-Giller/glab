@@ -1,14 +1,14 @@
 package g.tools.statistic.commands.wrappers.impl;
 
 import g.tools.statistic.commands.Command;
-import g.tools.statistic.commands.wrappers.InputPreparatorWithScanner;
+import g.tools.statistic.commands.wrappers.InputProcessorWithScanner;
 import g.tools.statistic.models.State;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class AddsRecordInput extends InputPreparatorWithScanner {
+public class AddsRecordInput extends InputProcessorWithScanner {
 
     public AddsRecordInput(State state, Scanner scanner) {
         super(state, scanner);
