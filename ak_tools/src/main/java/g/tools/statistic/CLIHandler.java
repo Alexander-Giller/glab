@@ -42,8 +42,9 @@ public class CLIHandler {
         this.state = new State();
         this.standardCommands = new StandardCommands();
 
-        this.inputProcessorChain = new FilePathInput(this.state, this.scanner)
-                .setNextCommand(new SaveNextInput(this.state))
+        this.inputProcessorChain = new FilePathInput(this.state, this.scanner);
+        // It's important to use at first new and after attach another chains.
+        this.inputProcessorChain.setNextCommand(new SaveNextInput(this.state))
                 .setNextCommand(new AddRecordInput(this.state, this.scanner))
                 .setNextCommand(new AddsRecordInput(this.state, this.scanner));
     }
