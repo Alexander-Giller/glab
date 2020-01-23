@@ -9,6 +9,7 @@ public enum Command {
     READ_FILE("read"),
     LOAD_FILE("load"),
     ADD_S("adds"),
+    DAYS("days"),
     EXIT_SHORT("!"),
     EXIT("exit");
 

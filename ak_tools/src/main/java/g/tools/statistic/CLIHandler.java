@@ -5,10 +5,7 @@ import g.tools.statistic.commands.Command;
 import g.tools.statistic.commands.CommandExecutor;
 import g.tools.statistic.commands.StandardCommands;
 import g.tools.statistic.commands.wrappers.*;
-import g.tools.statistic.commands.wrappers.impl.AddRecordInput;
-import g.tools.statistic.commands.wrappers.impl.AddsRecordInput;
-import g.tools.statistic.commands.wrappers.impl.FilePathInput;
-import g.tools.statistic.commands.wrappers.impl.SaveNextInput;
+import g.tools.statistic.commands.wrappers.impl.*;
 import g.tools.statistic.models.State;
 
 import java.util.*;
@@ -45,6 +42,8 @@ public class CLIHandler {
         this.inputProcessorChain = new FilePathInput(this.state, this.scanner);
         // It's important to use at first new and after attach another chains.
         this.inputProcessorChain.setNextCommand(new SaveNextInput(this.state))
+                .setNextCommand(new AddRecordInput(this.state, this.scanner))
+                .setNextCommand(new DaysInput(this.state))
                 .setNextCommand(new AddRecordInput(this.state, this.scanner))
                 .setNextCommand(new AddsRecordInput(this.state, this.scanner));
     }

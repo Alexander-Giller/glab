@@ -1,6 +1,7 @@
 package g.tools.statistic.commands;
 
 
+import g.tools.statistic.logic.LogicUtil;
 import g.tools.statistic.models.Record;
 import g.tools.statistic.models.Statistics;
 import org.apache.commons.csv.CSVFormat;
@@ -29,8 +30,15 @@ public class StandardCommands {
         commands.put(Command.READ_FILE, READ_FILE);
         commands.put(Command.LOAD_FILE, READ_FILE);
         commands.put(Command.ADD_S, ADD_S);
+        commands.put(Command.DAYS, DAYS);
         commands.put(Command.SAVE_NEXT_FILE, SAVE_NEXT_FILE);
     }
+
+    public final CommandExecutor DAYS = (input) -> {
+        long diffDays = LogicUtil.getStartEndDays(this.statistics);
+        System.out.println("Total days: " + diffDays);
+        return diffDays;
+    };
 
     public final CommandExecutor ADD_RECORD = (input) -> {
         Scanner in = (Scanner)input;
