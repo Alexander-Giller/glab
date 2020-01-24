@@ -1,9 +1,6 @@
 package g.tools.statistic.models;
 
 
-import java.util.Scanner;
-
-
 public class State {
 
     private String currentFilePath;
