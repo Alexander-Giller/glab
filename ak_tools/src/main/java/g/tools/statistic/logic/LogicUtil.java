@@ -5,7 +5,6 @@ import g.tools.statistic.models.Record;
 import g.tools.statistic.models.Statistics;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
