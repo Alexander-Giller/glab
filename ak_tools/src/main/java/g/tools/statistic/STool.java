@@ -6,7 +6,6 @@ public class STool {
 
     public static void main(String[] args) {
         String [] games = {
-                "Last of us",
                 "Doom"
         };
 
