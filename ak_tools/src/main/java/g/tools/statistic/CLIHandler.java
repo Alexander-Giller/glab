@@ -44,6 +44,7 @@ public class CLIHandler {
         this.inputProcessorChain.setNextCommand(new SaveNextInput(this.state))
                 .setNextCommand(new AddRecordInput(this.state, this.scanner))
                 .setNextCommand(new DaysInput(this.state))
+                .setNextCommand(new HowMuch(this.state, this.scanner))
                 .setNextCommand(new AddRecordInput(this.state, this.scanner))
                 .setNextCommand(new AddsRecordInput(this.state, this.scanner));
     }

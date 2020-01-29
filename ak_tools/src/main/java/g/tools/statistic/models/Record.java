@@ -109,6 +109,17 @@ public class Record {
         return Objects.hash(type, timeHours, description, comment);
     }
 
+    @Override
+    public String toString() {
+        return "Record{" +
+                "date=" + date +
+                ", type='" + type + '\'' +
+                ", timeHours=" + timeHours +
+                ", description='" + description + '\'' +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
+
 
     public static final class RecordBuilder {
         private Instant date;
@@ -118,6 +129,7 @@ public class Record {
         private String comment;
 
         private RecordBuilder() {
+            this.timeHours = new Double(0);
         }
 
         private RecordBuilder(String[] values) {
@@ -160,6 +172,10 @@ public class Record {
         public RecordBuilder setComment(String comment) {
             this.comment = comment;
             return this;
+        }
+
+        public void addHours(Double hours) {
+            this.timeHours += hours;
         }
 
         public Record build() {

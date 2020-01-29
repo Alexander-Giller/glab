@@ -4,6 +4,7 @@ package g.tools.statistic.commands;
 public enum Command {
 
     ADD_RECORD("add"),
+    HOW_MUCH("howmuch"),
     SAVE_FILE("save"),
     SAVE_NEXT_FILE("savenext"),
     READ_FILE("read"),

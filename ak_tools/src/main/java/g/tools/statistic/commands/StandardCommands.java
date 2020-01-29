@@ -1,6 +1,7 @@
 package g.tools.statistic.commands;
 
 
+import g.tools.statistic.commands.wrappers.impl.HowMuch;
 import g.tools.statistic.logic.LogicUtil;
 import g.tools.statistic.models.Record;
 import g.tools.statistic.models.Statistics;
@@ -32,12 +33,20 @@ public class StandardCommands {
         commands.put(Command.ADD_S, ADD_S);
         commands.put(Command.DAYS, DAYS);
         commands.put(Command.SAVE_NEXT_FILE, SAVE_NEXT_FILE);
+        commands.put(Command.HOW_MUCH, HOW_MUCH);
     }
 
     public final CommandExecutor DAYS = (input) -> {
         long diffDays = LogicUtil.getStartEndDays(this.statistics);
         System.out.println("Total days: " + diffDays);
         return diffDays;
+    };
+
+    public final CommandExecutor HOW_MUCH = (input) -> {
+        HowMuch.Parameter parameter = (HowMuch.Parameter) input;
+        Record aggregatedRecord = LogicUtil.calculateStatistic(this.statistics, parameter);
+        System.out.println(aggregatedRecord);
+        return null;
     };
 
     public final CommandExecutor ADD_RECORD = (input) -> {
