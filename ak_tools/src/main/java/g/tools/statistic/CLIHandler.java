@@ -7,6 +7,10 @@ import g.tools.statistic.commands.StandardCommands;
 import g.tools.statistic.commands.wrappers.*;
 import g.tools.statistic.commands.wrappers.impl.*;
 import g.tools.statistic.models.State;
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.Options;
 
 import java.util.*;
 
@@ -57,7 +61,16 @@ public class CLIHandler {
     }
 
     private StepCode nextStep(Command inputCommand, Object sInput) {
-        Command command = inputCommand == null ? Command.parse(this.scanner.nextLine()) : inputCommand;
+
+        Command command;
+        if (inputCommand == null) {
+            String line = this.scanner.nextLine();
+            String args[] = line.split(" ");
+            // TODO
+//            command = Command.parse(args);
+        } else {
+            command = inputCommand;
+        }
 
         if (command == Command.EXIT || command == Command.EXIT_SHORT) {
             return StepCode.EXIT;
@@ -75,6 +88,18 @@ public class CLIHandler {
         System.out.println("Command " + command + " executed");
 
         return StepCode.OK;
+    }
+
+
+    private static class GCLIParser {
+
+        private final CommandLineParser parser = new BasicParser();
+        private final Options options = new Options();
+
+
+        public GCLIParser() {
+            options.addOption("", false, "");
+        }
     }
 
 }
