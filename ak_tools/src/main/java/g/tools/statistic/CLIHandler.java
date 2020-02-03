@@ -7,10 +7,7 @@ import g.tools.statistic.commands.StandardCommands;
 import g.tools.statistic.commands.wrappers.*;
 import g.tools.statistic.commands.wrappers.impl.*;
 import g.tools.statistic.models.State;
-import org.apache.commons.cli.BasicParser;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.Options;
+import org.apache.commons.cli.*;
 
 import java.util.*;
 
@@ -36,12 +33,14 @@ public class CLIHandler {
     private final Scanner scanner;
     private final StandardCommands standardCommands;
     private final IInputProcessor inputProcessorChain;
+    private final GCLIParser cliParser;
 
 
     public CLIHandler() {
         this.scanner = new Scanner(System.in);
         this.state = new State();
         this.standardCommands = new StandardCommands();
+        this.cliParser = new GCLIParser();
 
         this.inputProcessorChain = new FilePathInput(this.state, this.scanner);
         // It's important to use at first new and after attach another chains.
@@ -66,13 +65,12 @@ public class CLIHandler {
         if (inputCommand == null) {
             String line = this.scanner.nextLine();
             String args[] = line.split(" ");
-            // TODO
-//            command = Command.parse(args);
+            command = this.cliParser.parse(args);
         } else {
             command = inputCommand;
         }
 
-        if (command == Command.EXIT || command == Command.EXIT_SHORT) {
+        if (command == Command.EXIT) {
             return StepCode.EXIT;
         } else if (command == null) {
             return StepCode.UNKNOWN_COMMAND;
@@ -98,7 +96,33 @@ public class CLIHandler {
 
 
         public GCLIParser() {
-            options.addOption("", false, "");
+            Arrays.asList(Command.values()).forEach(command -> {
+                options.addOption(command.getName(), command.hasArg(), command.getName());
+            });
+        }
+
+        public Command parse(String[] args) {
+            Command result;
+
+            try {
+                CommandLine commandLine = parser.parse(this.options, args);
+                List<String> sCommands = Arrays.asList(commandLine.getArgs());
+                Optional<String> firstCommand = sCommands.stream().findFirst();
+
+                if (firstCommand.isPresent()) {
+                    String sCommand = firstCommand.get();
+                    result = Command.parse(sCommand);
+                } else {
+                    System.out.println("There is no any command in line");
+                    result = null;
+                }
+
+            } catch (ParseException e) {
+                System.out.println(e.getMessage());
+                result = null;
+            }
+
+            return result;
         }
     }
 

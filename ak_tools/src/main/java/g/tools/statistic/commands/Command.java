@@ -5,19 +5,25 @@ public enum Command {
 
     ADD_RECORD("add"),
     HOW_MUCH("howmuch"),
-    SAVE_FILE("save"),
+    SAVE_FILE("save", true),
     SAVE_NEXT_FILE("savenext"),
-    READ_FILE("read"),
-    LOAD_FILE("load"),
+    READ_FILE("read", true),
+    LOAD_FILE("load", true),
     ADD_S("adds"),
     DAYS("days"),
-    EXIT_SHORT("!"),
     EXIT("exit");
 
     private final String name;
+    private final boolean hasArg;
 
     Command(String name) {
         this.name = name;
+        this.hasArg = false;
+    }
+
+    Command(String name, boolean hasArg) {
+        this.name = name;
+        this.hasArg = hasArg;
     }
 
     public static Command parse(String command) {
@@ -27,8 +33,16 @@ public enum Command {
                 return value;
             }
         }
-
         System.out.println("Unknown command: " + command);
         return null;
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean hasArg() {
+        return this.hasArg;
+    }
+
 }
