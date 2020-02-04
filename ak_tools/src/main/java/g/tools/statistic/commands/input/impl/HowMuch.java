@@ -1,7 +1,7 @@
-package g.tools.statistic.commands.wrappers.impl;
+package g.tools.statistic.commands.input.impl;
 
 import g.tools.statistic.commands.Command;
-import g.tools.statistic.commands.wrappers.InputProcessorWithScanner;
+import g.tools.statistic.commands.input.InputProcessorWithScanner;
 import g.tools.statistic.models.State;
 
 import java.util.Arrays;
@@ -18,7 +18,7 @@ public class HowMuch extends InputProcessorWithScanner {
         private final String name;
 
         private final static List<String> activities = Arrays.asList("активность", "activity", "activities");
-        private final static List<String> streams = Arrays.asList("stream", "stream", "стрим");
+        private final static List<String> streams = Arrays.asList("streams", "stream", "стрим");
         private final static List<String> learns = Arrays.asList("учеба", "learn", "учёба", "обучение");
 
 
@@ -30,9 +30,9 @@ public class HowMuch extends InputProcessorWithScanner {
             Parameter res;
             if (activities.contains(string)) {
                 res = ACTIVITY;
-            } else if(streams.contains(STREAM)) {
+            } else if(streams.contains(string)) {
                 res = STREAM;
-            } else if (learns.contains(LEARN)) {
+            } else if (learns.contains(string)) {
                 res = LEARN;
             } else {
                 res = null;

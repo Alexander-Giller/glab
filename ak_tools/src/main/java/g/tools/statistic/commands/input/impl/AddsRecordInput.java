@@ -1,7 +1,7 @@
-package g.tools.statistic.commands.wrappers.impl;
+package g.tools.statistic.commands.input.impl;
 
 import g.tools.statistic.commands.Command;
-import g.tools.statistic.commands.wrappers.InputProcessorWithScanner;
+import g.tools.statistic.commands.input.InputProcessorWithScanner;
 import g.tools.statistic.models.State;
 
 import java.util.HashMap;

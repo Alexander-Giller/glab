@@ -5,6 +5,8 @@ public enum Command {
 
     ADD_RECORD("add"),
     HOW_MUCH("howmuch"),
+    HOW_MUCH_ALL("howmuchall"),
+    ALL("all"),
     SAVE_FILE("save", true),
     SAVE_NEXT_FILE("savenext"),
     READ_FILE("read", true),

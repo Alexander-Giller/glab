@@ -1,4 +1,4 @@
-package g.tools.statistic.commands.wrappers;
+package g.tools.statistic.commands.input;
 
 import g.tools.statistic.commands.Command;
 import g.tools.statistic.models.State;
