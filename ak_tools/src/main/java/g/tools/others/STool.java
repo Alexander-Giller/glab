@@ -1,4 +1,4 @@
-package g.tools.statistic;
+package g.tools.others;
 
 import java.util.Random;
 
