@@ -4,7 +4,6 @@ package g.tools.file.dag;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
@@ -15,38 +14,49 @@ import java.util.stream.Collectors;
 
 public final class DAGAnalyser {
 
+
+
     private DAGAnalyser() {
     }
 
     public static void main(String[] args) {
+        // Defining input parameters.
         String dir = "C:\\Work\\AS_W\\big-data-analytics-automation-config\\dags\\";
         List<File> files = FileUtilsDag.getAllDagFiles(new File(dir));
         PrintUtils.printFiles(files);
 
+        // Reading input data.
+        Map<String, AggregateModel> result = readAggregates(dir, files);
+
+        // Modify structure for printing.
+        List<AggregateModel> aggregateModels = result.entrySet().stream()
+                .map(entry -> entry.getValue())
+                .collect(Collectors.toList());
+
+        // Print info
+        PrintUtils.showAggregates(aggregateModels);
+        System.out.println("Total aggregates: " + result.size());
+        System.out.println("Total DAGs: " + files.size());
+    }
+
+    private static Map<String, AggregateModel> readAggregates(String dir, List<File> files) {
         Map<String, AggregateModel> result = new HashMap<>();
+
 
         files.stream().forEach(file -> {
             try {
                 String filePath = file.getAbsolutePath();
                 Map<String, AggregateModel> aggregates = parseJSON(filePath, dir);
-                aggregates.entrySet().forEach(entry -> {
-                    if (!Consts.IMPORT.equals(entry.getValue().getType().toLowerCase())) {
-                        result.put(entry.getKey(), entry.getValue());
-                    }
-                });
+                aggregates.entrySet().stream()
+                        .filter(entry -> !Consts.IMPORT.equals(entry.getValue().getType().toLowerCase())) // exclude imports
+//                        .filter(entry -> "common".equals(entry.getValue().getGroup()))
+                        .forEach(entry -> result.put(entry.getKey(), entry.getValue())); // put into result
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
 
-        List<AggregateModel> aggregateModels = result.entrySet().stream()
-                .map(entry -> entry.getValue())
-                .collect(Collectors.toList());
-        PrintUtils.showAggregates(aggregateModels);
-
-        // General info
-        System.out.println("Total aggregates: " + result.size());
-        System.out.println("Total DAGs: " + files.size());
+        return result;
     }
 
     private static Map<String, AggregateModel> parseJSON(String filePath, String baseDir) throws IOException {
