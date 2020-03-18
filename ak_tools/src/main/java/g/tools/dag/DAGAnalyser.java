@@ -1,4 +1,4 @@
-package g.tools.file.dag;
+package g.tools.dag;
 
 
 import com.fasterxml.jackson.core.JsonFactory;
@@ -9,48 +9,51 @@ import org.apache.commons.io.IOUtils;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 public final class DAGAnalyser {
-
-
 
     private DAGAnalyser() {
     }
 
     public static void main(String[] args) {
         // Defining input parameters.
-        String dir = "C:\\Work\\AS_W\\big-data-analytics-automation-config\\dags\\";
+        String baseDir = "C:\\Work\\AS_W\\big-data-analytics-automation-config\\dags\\";
+//        String dir = baseDir + "common\\";
+        String dir = baseDir;
         List<File> files = FileUtilsDag.getAllDagFiles(new File(dir));
         PrintUtils.printFiles(files);
 
         // Reading input data.
-        Map<String, AggregateModel> result = readAggregates(dir, files);
-
-        // Modify structure for printing.
-        List<AggregateModel> aggregateModels = result.entrySet().stream()
-                .map(entry -> entry.getValue())
-                .collect(Collectors.toList());
+        Map<String, AggregateModel> aggregatesMap = readAggregates(files, baseDir);
 
         // Print info
-        PrintUtils.showAggregates(aggregateModels);
-        System.out.println("Total aggregates: " + result.size());
+        System.out.println("----- One by One ------");
+        PrintUtils.showAggregatesOneByOne(aggregatesMap);
+        System.out.println();
+
+        System.out.println("------ Tree (From Starts To Ends) --------");
+        PrintUtils.showAggregatesGraphFromStarts(aggregatesMap);
+        System.out.println();
+
+        System.out.println("------ Tree (From Ends To Starts) --------");
+        PrintUtils.showAggregatesGraphFromEnds(aggregatesMap);
+        System.out.println();
+
+        System.out.println("Total aggregates: " + aggregatesMap.size());
         System.out.println("Total DAGs: " + files.size());
     }
 
-    private static Map<String, AggregateModel> readAggregates(String dir, List<File> files) {
+    private static Map<String, AggregateModel> readAggregates(List<File> files, String baseDir) {
         Map<String, AggregateModel> result = new HashMap<>();
-
 
         files.stream().forEach(file -> {
             try {
                 String filePath = file.getAbsolutePath();
-                Map<String, AggregateModel> aggregates = parseJSON(filePath, dir);
-                aggregates.entrySet().stream()
-                        .filter(entry -> !Consts.IMPORT.equals(entry.getValue().getType().toLowerCase())) // exclude imports
-//                        .filter(entry -> "common".equals(entry.getValue().getGroup()))
-                        .forEach(entry -> result.put(entry.getKey(), entry.getValue())); // put into result
+                Map<String, AggregateModel> map = readFromJSON(filePath, baseDir);
+                map.entrySet().stream()
+                        .filter(entry -> !Consts.IMPORT.equals(entry.getValue().getType()))
+                        .forEach(entry -> result.put(entry.getKey(), entry.getValue()));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -59,9 +62,9 @@ public final class DAGAnalyser {
         return result;
     }
 
-    private static Map<String, AggregateModel> parseJSON(String filePath, String baseDir) throws IOException {
+    private static Map<String, AggregateModel> readFromJSON(String filePath, String baseDir) throws IOException {
         // Get file content as string.
-        String content = IOUtils.toString(new FileInputStream(filePath), StandardCharsets.UTF_8.displayName());
+        String content = IOUtils.toString(new FileInputStream(filePath), StandardCharsets.UTF_8);
 
         // Create specified mapper. It will provide ability to parse a json as tree.
         ObjectMapper mapper = new ObjectMapper(new JsonFactory());
@@ -78,7 +81,6 @@ public final class DAGAnalyser {
         String group = FileUtilsDag.getGroupFromFilePath(baseDir, filePath); // based on directory.
         AggregateModel.AggregateModelBuilder modelBuilder = new AggregateModel.AggregateModelBuilder();
         modelBuilder.setGroup(group);
-
         aggregatesRootNode.stream().forEach(aggregates -> {
             List<AggregateModel> aggregateModels = getAggregates(aggregates, modelBuilder);
             aggregateModels.forEach(aggregateModel -> result.put(aggregateModel.getName(), aggregateModel));

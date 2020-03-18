@@ -1,6 +1,7 @@
-package g.tools.file.dag;
+package g.tools.dag;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -61,13 +62,19 @@ public class AggregateModel {
         this.type = type;
     }
 
+    public String toString() {
+        return this.name + " ["
+                + this.group + ", "
+                + this.type + "]";
+    }
+
 
     public static final class AggregateModelBuilder {
         private String name;
         private String group;
         private String type;
-        private List<String> aggregateDependencies;
-        private List<String> rdmDependencies;
+        private List<String> aggregateDependencies = new ArrayList<>();
+        private List<String> rdmDependencies = new ArrayList<>();
 
         public AggregateModelBuilder() {
         }
@@ -78,12 +85,12 @@ public class AggregateModel {
         }
 
         public AggregateModelBuilder setAggregateDependencies(List<String> aggregateDependencies) {
-            this.aggregateDependencies = aggregateDependencies;
+            this.aggregateDependencies = aggregateDependencies == null ? new ArrayList<>() : aggregateDependencies;
             return this;
         }
 
         public AggregateModelBuilder setRdmDependencies(List<String> rdmDependencies) {
-            this.rdmDependencies = rdmDependencies;
+            this.rdmDependencies = rdmDependencies == null ? new ArrayList<>() : rdmDependencies;
             return this;
         }
 
@@ -106,5 +113,6 @@ public class AggregateModel {
             aggregateModel.setType(type);
             return aggregateModel;
         }
+
     }
 }

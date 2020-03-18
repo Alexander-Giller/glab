@@ -1,4 +1,4 @@
-package g.tools.file.dag;
+package g.tools.dag;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,12 +31,15 @@ public class FileUtilsDag {
 
     public static String getGroupFromFilePath(String baseDirPath, String filePath) {
         String localFilePath = filePath.replace(baseDirPath, "");
+
         int groupEndIndex = localFilePath.indexOf(File.separator);
         if (groupEndIndex < 0) {
-            throw new IllegalArgumentException("Can not determine group for the file. " +
-                    "BaseDir: " + baseDirPath + " File: " + filePath);
+            throw new IllegalArgumentException("Can not determine group for the file. "
+                    + "BaseDir: " + baseDirPath + " File: " + filePath);
         }
-        return localFilePath.substring(0, groupEndIndex);
+
+        String group = localFilePath.substring(0, groupEndIndex);
+        return group;
     }
 
 }
