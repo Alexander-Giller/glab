@@ -1,0 +1,14 @@
+car:
+    custom:
+        number: "123"
+        model: "toyta"
+        carType: LIGHT
+person:
+    custom:
+        name: "Vasya"
+        surname: "Ivanov"
+demo:
+    car:
+        number: "demo_number"
+        model: "demo"
+        type: CUSTOM
