@@ -1,5 +1,11 @@
 # glab
 Just my experiments
 
-mvn clean install
-gradlew clean build
+# how to build modules
+It contains mvn and gradle based build. Just for practice.
+
+mvn clean install   
+   * ak_tools
+
+gradlew clean build 
+   * rest-service-template
