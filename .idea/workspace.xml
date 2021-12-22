@@ -23,60 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bf8e055-46fb-4edd-8e84-244f64022f60" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/6.5.1/executionHistory/executionHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/6.5.1/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/6.5.1/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/6.5.1/fileContent/fileContent.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/6.5.1/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/6.5.1/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/6.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/6.5.1/gc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/6.5.1/javaCompile/classAnalysis.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/6.5.1/javaCompile/jarAnalysis.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/6.5.1/javaCompile/javaCompile.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/6.5.1/javaCompile/taskHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/checksums/checksums.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/checksums/md5-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/checksums/sha1-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/.gradle/vcs-1/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/Greeting.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/GreetingController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/PersonalDataPostProcessor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/RestServiceApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/data/AppConfiguration.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/data/AppProperties.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/data/Factory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/data/PersonalData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/data/models/Car$CarBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/data/models/Car$CarType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/data/models/Car.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/data/models/CarPark$CarParkBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/data/models/CarPark.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/data/models/DemoCar.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/data/models/Person$PersonBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/main/com/example/restservice/data/models/Person.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/classes/java/test/com/example/restservice/GreetingControllerTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/libs/rest-service-0.0.1-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/reports/tests/test/classes/com.example.restservice.GreetingControllerTests.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/reports/tests/test/css/base-style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/reports/tests/test/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/reports/tests/test/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/reports/tests/test/js/report.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/reports/tests/test/packages/com.example.restservice.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/resources/main/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/resources/main/prop.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/test-results/test/TEST-com.example.restservice.GreetingControllerTests.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/test-results/test/binary/output.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/test-results/test/binary/output.bin.idx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/test-results/test/binary/results.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/tmp/bootJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/build/tmp/compileTestJava/source-classes-mapping.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/src/main/main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-service-template/src/main/main1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
